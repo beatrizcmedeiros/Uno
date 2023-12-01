@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#cartaSelecionada {
+    margin-top: 20px;
+}
+
+#listaCartas {
+    list-style-type: none;
+    padding: 0;
+}

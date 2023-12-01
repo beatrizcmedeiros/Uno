@@ -1,0 +1,38 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebView Example</title>
+</head>
+<body>
+<h1>Carta Uno Aleatória</h1>
+<p id="descricaoCarta"></p>
+
+<button onclick="sortearCarta()">Sortear Carta</button>
+<button onclick="mostrarLista()">Mostrar Lista</button>
+
+<script>
+        function sortearCarta() {
+            Android.sortearCarta();
+        }
+
+        function mostrarLista() {
+            Android.mostrarLista();
+        }
+
+        function atualizarCarta(descricao) {
+            document.getElementById('descricaoCarta').innerText = descricao;
+        }
+
+        function mostrarLista(jsonCartas) {
+            // Manipule a lista de cartas como necessário
+            var cartas = JSON.parse(jsonCartas);
+            // Faça algo com a lista, como exibir em um elemento HTML
+        }
+    </script>
+</body>
+</html>
+

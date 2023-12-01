@@ -1,5 +1,6 @@
-package com.tsi.uno;
+package com.tsi.uno.model;
 
+import com.tsi.uno.R;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -78,5 +79,10 @@ public class CartaUnoRandom {
         Random random = new Random();
         int cartaSorteada = random.nextInt(listaDeCartas.size());
         return listaDeCartas.get(cartaSorteada);
+    }
+
+    public String selecionarDescricaoCartaAleatoria() {
+        CartaUno cartaSorteada = selecionarCartaAleatoria();
+        return cartaSorteada.getDescricaoCarta();
     }
 }//CartaUnoRandom

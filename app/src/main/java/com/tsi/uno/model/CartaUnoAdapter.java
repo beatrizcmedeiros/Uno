@@ -1,4 +1,4 @@
-package com.tsi.uno;
+package com.tsi.uno.model;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.tsi.uno.R;
+import com.tsi.uno.model.CartaUno;
+
 import java.util.List;
 
 public class CartaUnoAdapter extends BaseAdapter {

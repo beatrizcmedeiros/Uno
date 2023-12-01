@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.tsi.uno.model.CartaUno;
+import com.tsi.uno.model.CartaUnoRandom;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageView imageView;
+
+   private ImageView imageView;
+
+    private WebView webView;
     private CartaUnoRandom carta;
 
     List<CartaUno> cartasUnoSorteadas = new ArrayList<>();
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public List<String> listaDeDescricaoCartas(){
         List<String> listaCartas = new ArrayList<>();
 
@@ -106,25 +113,10 @@ public class MainActivity extends AppCompatActivity {
         return listaCartas;
     }
 
-//    public void sortearCarta(View view) {
-//        CartaUno cartaSorteada = carta.selecionarCartaAleatoria();
-//        imageView.setImageResource(cartaSorteada.getImagemCarta());
-//
-//        cartasUnoSorteadas.add(cartaSorteada);
-//    }
-
     public void sortearCarta(View view) {
         CartaUno cartaSorteada = carta.selecionarCartaAleatoria();
         imageView.setImageResource(cartaSorteada.getImagemCarta());
 
-        // Adicionar a carta sorteada ao banco de dados
-        long newRowId = cartaSorteada.inserirCartaNoBanco(getApplicationContext());
-
-        if (newRowId != -1) {
-            Toast.makeText(this, "Carta adicionada ao banco de dados", Toast.LENGTH_SHORT).show();
-            cartasUnoSorteadas.add(cartaSorteada);
-        } else {
-            Toast.makeText(this, "Erro ao adicionar a carta ao banco de dados", Toast.LENGTH_SHORT).show();
-        }
+        cartasUnoSorteadas.add(cartaSorteada);
     }
 }
