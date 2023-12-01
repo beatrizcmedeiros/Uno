@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tsi.uno.R;
-import com.tsi.uno.model.CartaUno;
 
 import java.util.List;
 
