@@ -25,8 +25,8 @@ public class ListaCartasActivity extends AppCompatActivity {
 
         bancoDeDados = new CartaUnoDAO(this);
 
-        // Obtenha as cartas do banco de dados
-        List<CartaUno> cartasSorteadas = obterCartasDoBanco();
+        // Obtenha as cartas do Intent
+        List<CartaUno> cartasSorteadas = getIntent().getParcelableArrayListExtra("cartasSorteadas");
 
         ListView listView = findViewById(R.id.lista);
 

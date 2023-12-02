@@ -1,8 +1,9 @@
 package com.tsi.uno.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class CartaUno implements Serializable {
+public class CartaUno implements Parcelable {
     private long id;
     private final int imgCarta;
     private final String dscCarta;
@@ -12,17 +13,52 @@ public class CartaUno implements Serializable {
         this.imgCarta = imgCarta;
         this.dscCarta = dscCarta;
     }
+
     public long getId() {
         return id;
     }
+
     public void setId(long id) {
         this.id = id;
     }
+
     public int getImagemCarta() {
         return imgCarta;
     }
+
     public String getDescricaoCarta() {
         return dscCarta;
     }
 
-}//CartaUno
+    // Métodos necessários para implementar Parcelable
+
+    protected CartaUno(Parcel in) {
+        id = in.readLong();
+        imgCarta = in.readInt();
+        dscCarta = in.readString();
+    }
+
+    public static final Creator<CartaUno> CREATOR = new Creator<CartaUno>() {
+        @Override
+        public CartaUno createFromParcel(Parcel in) {
+            return new CartaUno(in);
+        }
+
+        @Override
+        public CartaUno[] newArray(int size) {
+            return new CartaUno[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeInt(imgCarta);
+        dest.writeString(dscCarta);
+    }
+}

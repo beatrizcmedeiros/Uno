@@ -1,11 +1,14 @@
 package com.tsi.uno;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient());
         webView.addJavascriptInterface(new WebAppInterface(this, cartasUnoSorteadas), "Android");
+        webView.setWebContentsDebuggingEnabled(true);
 
 
         // Carregar o conteúdo HTML na WebView
@@ -46,13 +50,20 @@ public class MainActivity extends AppCompatActivity {
         CartaUno cartaSorteada = carta.selecionarCartaAleatoria();
         cartasUnoSorteadas.add(cartaSorteada);
 
-        // Carregar a imagem na WebView após sortear uma carta
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                carregarImagemNaWebView(cartaSorteada.getImagemCarta());
-            }
-        });
+//        Toast.makeText(this, cartaSorteada.getImagemCarta(), Toast.LENGTH_SHORT).show();
+
+        // Carregar o conteúdo HTML na WebView após sortear uma carta
+        carregarPaginaHtml();
+
+        // Carregar a imagem da carta sorteada na WebView
+        carregarImagemNaWebView(cartaSorteada.getImagemCarta());
+    }
+
+    public void listarCartasSorteadas(List<CartaUno> cartasSorteadas) {
+        // Inicie a ListaCartasActivity e passe as cartas sorteadas como extras
+        Intent intent = new Intent(this, ListaCartasActivity.class);
+        intent.putParcelableArrayListExtra("cartasSorteadas", (ArrayList<? extends Parcelable>) new ArrayList<CartaUno>(cartasSorteadas));
+        startActivity(intent);
     }
 
     private void carregarPaginaHtml() {
@@ -67,18 +78,17 @@ public class MainActivity extends AppCompatActivity {
         webView.addJavascriptInterface(new WebAppInterface(this, cartasUnoSorteadas), "Android");
     }
 
-    private void carregarImagemNaWebView(final int imagemResId) {
-        if (webView != null) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    // Carregue o conteúdo HTML e CSS
-                    webView.loadUrl("file:///android_asset/web/carta.html");
-                }
-            });
-        }
+    private void carregarImagemNaWebView(int imagemResId) {
+        // Carregar a string HTML na WebView a partir do arquivo 'carta.html'
+        webView.loadUrl("file:///android_asset/web/carta.html");
+
+        // Adicionar uma interface JavaScript para se comunicar com o código Java
+        webView.addJavascriptInterface(new WebAppInterface(this, cartasUnoSorteadas), "Android");
+
+        // Aguarde um tempo de 500ms antes de chamar a função JavaScript
+        webView.postDelayed(() -> {
+            String jsFunction = "exibirCartaSorteada('" + imagemResId + "')";
+            webView.evaluateJavascript(jsFunction, null);
+        }, 500);
     }
-
-
-
 }
