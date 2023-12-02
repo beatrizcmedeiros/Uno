@@ -1,23 +1,14 @@
+/* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-h1, h2 {
-    color: #333;
+#carta-container {
+    text-align: center;
 }
 
-button {
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-#cartaSelecionada {
-    margin-top: 20px;
-}
-
-#listaCartas {
-    list-style-type: none;
-    padding: 0;
-}
+#carta-img {
+    width: 213px;
+    height: 286px;

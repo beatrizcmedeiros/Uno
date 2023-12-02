@@ -87,6 +87,11 @@ public class CartaUnoRandom {
         return listaCartas;
     }
 
+    public String getDescricaoCartaAleatoria() {
+        CartaUno cartaSorteada = selecionarCartaAleatoria();
+        return cartaSorteada.getDescricaoCarta();
+    }
+
     public CartaUno selecionarCartaAleatoria() {
         SQLiteDatabase db = bancoDeDados.getWritableDatabase();
         Random random = new Random();
